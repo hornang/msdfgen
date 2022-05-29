@@ -307,9 +307,10 @@ bool buildShapeFromSvgPath(Shape &shape, const char *pathDef, double endpointSna
     return true;
 }
 
-bool loadSvgShape(Shape &output, const char *filename, int pathIndex, Vector2 *dimensions) {
+bool loadSvgShape(Shape &output, const char *data, int length, int pathIndex, Vector2 *dimensions)
+{
     tinyxml2::XMLDocument doc;
-    if (doc.LoadFile(filename))
+    if (doc.Parse(data, length))
         return false;
     tinyxml2::XMLElement *root = doc.FirstChildElement("svg");
     if (!root)
