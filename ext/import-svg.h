@@ -10,6 +10,5 @@ namespace msdfgen {
 bool buildShapeFromSvgPath(Shape &shape, const char *pathDef, double endpointSnapRange = 0);
 
 /// Reads the first path found in the specified SVG file and stores it as a Shape in output.
-bool loadSvgShape(Shape &output, const char *filename, int pathIndex = 0, Vector2 *dimensions = NULL);
-
+bool loadSvgShape(Shape &output, const char *data, int length, int pathIndex = 0, Vector2 *dimensions = NULL);
 }
