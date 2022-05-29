@@ -27,6 +27,8 @@ if(NOT TARGET Freetype::Freetype)
     find_package(Freetype REQUIRED)
 endif()
 
+find_package(tinyxml2)
+
 file(GLOB_RECURSE MSDFGEN_CORE_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "core/*.h" "core/*.hpp")
 file(GLOB_RECURSE MSDFGEN_CORE_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "core/*.cpp")
 file(GLOB_RECURSE MSDFGEN_EXT_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "ext/*.h" "ext/*.hpp")
@@ -60,7 +62,7 @@ if(NOT MSDFGEN_CORE_ONLY)
     add_library(msdfgen-ext "${CMAKE_CURRENT_SOURCE_DIR}/msdfgen-ext.h" ${MSDFGEN_EXT_HEADERS} ${MSDFGEN_EXT_SOURCES})
     add_library(msdfgen::msdfgen-ext ALIAS msdfgen-ext)
     set_target_properties(msdfgen-ext PROPERTIES PUBLIC_HEADER "${MSDFGEN_EXT_HEADERS}")
-    target_link_libraries(msdfgen-ext PUBLIC msdfgen::msdfgen-core Freetype::Freetype)
+    target_link_libraries(msdfgen-ext PUBLIC msdfgen::msdfgen-core Freetype::Freetype tinyxml2::tinyxml2)
     target_include_directories(msdfgen-ext
         PUBLIC
             $<INSTALL_INTERFACE:include/msdfgen>
