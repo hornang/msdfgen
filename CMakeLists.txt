@@ -15,14 +15,6 @@ endif()
 
 project(msdfgen VERSION 1.9 LANGUAGES CXX)
 
-if(NOT CMAKE_MSVC_RUNTIME_LIBRARY)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-    get_directory_property(MSDFGEN_HAS_PARENT PARENT_DIRECTORY)
-    if(MSDFGEN_HAS_PARENT)
-        set(CMAKE_MSVC_RUNTIME_LIBRARY ${CMAKE_MSVC_RUNTIME_LIBRARY} PARENT_SCOPE)
-    endif()
-endif()
-
 if(NOT TARGET Freetype::Freetype)
     find_package(Freetype REQUIRED)
 endif()
@@ -38,7 +30,6 @@ file(GLOB_RECURSE MSDFGEN_EXT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "ext/
 add_library(msdfgen-core "${CMAKE_CURRENT_SOURCE_DIR}/msdfgen.h" ${MSDFGEN_CORE_HEADERS} ${MSDFGEN_CORE_SOURCES})
 add_library(msdfgen::msdfgen-core ALIAS msdfgen-core)
 set_target_properties(msdfgen-core PROPERTIES PUBLIC_HEADER "${MSDFGEN_CORE_HEADERS}")
-#set_property(TARGET msdfgen-core PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 target_include_directories(msdfgen-core INTERFACE
     $<INSTALL_INTERFACE:include/msdfgen>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/>
