@@ -297,6 +297,12 @@ if(MSDFGEN_INSTALL)
             FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR}
             PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/msdfgen/ext
         )
+        install(
+            TARGETS msdfgen-ext
+            RUNTIME_DEPENDENCIES
+            PRE_INCLUDE_REGEXES "png" "tinyxml2" "freetype"
+            PRE_EXCLUDE_REGEXES ".*"
+        )
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/msdfgen-ext.h" DESTINATION include/msdfgen)
         if(MSVC AND BUILD_SHARED_LIBS)
             install(FILES $<TARGET_PDB_FILE:msdfgen-ext> DESTINATION ${CMAKE_INSTALL_BINDIR} OPTIONAL)
