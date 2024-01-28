@@ -300,7 +300,7 @@ if(MSDFGEN_INSTALL)
         install(
             TARGETS msdfgen-ext
             RUNTIME_DEPENDENCIES
-            PRE_INCLUDE_REGEXES "png" "tinyxml2" "freetype"
+            PRE_INCLUDE_REGEXES "png" "tinyxml2" "freetype" "zlib"
             PRE_EXCLUDE_REGEXES ".*"
         )
         install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/msdfgen-ext.h" DESTINATION include/msdfgen)
